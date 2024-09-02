@@ -13,6 +13,7 @@ const server = http.createServer((req, res) => {
         req.on('data', (chunk) => {
             resData += chunk;
         });
+        //on 함수는 이벤트큐에 들어가므로 메인쓰레드 로직의 순서에 주의가 필요하다.
         req.on('end', () => {
             fs.writeFile(filePath, resData, (err) => {
                 if (err){
@@ -23,6 +24,7 @@ const server = http.createServer((req, res) => {
                     process.stdout.on('data', (data) => {
                         console.log("파이썬 명령어 실행!");
                         res.write(data);
+                        //메인쓰레드 로직을 유지하기 위해, 콜백함수 안에 res.end() 넣어.
                         res.end();
                     })
                     process.stderr.on('err', (err) => {
