@@ -1,0 +1,21 @@
+{
+  "name": "4th_typescript",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "node dist/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
