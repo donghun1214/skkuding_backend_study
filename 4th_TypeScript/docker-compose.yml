@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  4th_typescript:
+    image: node
+    build:
+      dockerfile: Dockerfile
+    ports: 
+      - "3000:3000"
+
