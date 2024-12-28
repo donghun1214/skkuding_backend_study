@@ -14,7 +14,7 @@ export class RestaurantController {
     }
 
     @Get(`/:name`)
-    async getRestaurant(@Param('name') name:string){
+    async getRestaurant(@Param('name') name){
         return await this.restaurantService.getRestaurantByName(name);
     }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import { RestaurantDto } from './dto/restaurant.dto';
+import { DuplicateException } from 'src/libs/exception/src/custom-filter';
 
 const dataPath = path.join(__dirname, '../../data/restaurants.json');
 const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
@@ -17,6 +18,9 @@ export class RestaurantService {
     }
 
     async createRestaurant(restaurantDto:RestaurantDto){
+        if(data.restaurants.find(restaurant => restaurant.name === restaurantDto.name)){
+            throw new DuplicateException(restaurantDto.name).convert2HTTPException();
+        }
         data.restaurants.push(restaurantDto);
         fs.writeFile(dataPath, JSON.stringify(data, null, 2), (err) => {
             if(err){
